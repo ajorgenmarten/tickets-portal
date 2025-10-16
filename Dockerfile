@@ -12,7 +12,7 @@ COPY . .
 
 RUN pnpm i --frozen-lockfile
 
-RUN pnpm build
+RUN VITE_BACKEND_URL=$VITE_BACKEND_URL pnpm build
 
 RUN pnpm prune --prod
 
