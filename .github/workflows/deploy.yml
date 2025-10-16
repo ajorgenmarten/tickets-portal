@@ -47,7 +47,7 @@ jobs:
     steps:
       - name: Remose ssh
         uses: appleboy/ssh-action@v1
-        whit:
+        with:
           host: ${{ secrets.HOST_ADDRESS }}
           key: ${{ secrets.HOST_SSHKEY }}
           username: ${{ secrets.HOST_USERNAME }}
