@@ -1,8 +1,8 @@
 FROM node:20-alpine AS build
 
-RUN npm install -g pnpm
-
 WORKDIR /usr/src/app
+
+RUN corepack enable pnpm
 
 COPY package*.json ./
 
