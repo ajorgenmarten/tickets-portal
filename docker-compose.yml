@@ -1,0 +1,8 @@
+services:
+  tickets:
+    container_name: tickets
+    build: .
+    ports:
+      - "80:80"
+    environment:
+      VITE_BACKEND_URL: http://example.com
