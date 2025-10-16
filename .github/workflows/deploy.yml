@@ -59,7 +59,7 @@ jobs:
             docker pull ajorgenmarten/tickets-portal:latest || true
 
             docker compose down tickets-portal
-            docker compose up --build -d gateway
+            docker compose up --build -d tickets-portal
 
             docker image prune -f
 
