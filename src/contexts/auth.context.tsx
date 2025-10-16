@@ -6,12 +6,20 @@ type MeInformation = {
   email: string
 }
 
-const AuthContext = createContext({
+type AuthContextType = {
+  me: MeInformation | null
+  token: string | null
+  logOut: () => void
+  setMe: (me: MeInformation | null) => void
+  setToken: (token: string | null) => void
+}
+
+const AuthContext = createContext<AuthContextType>({
   me: null,
-  setMe: (info: MeInformation|null) => {},
+  setMe: (info: MeInformation|null) => console.log(info),
   logOut: () => {},
   token: null,
-  setToken: (token: string | null) => {}
+  setToken: (token: string | null) => console.log(token)
 });
 
 const useAuthContext = () => useContext(AuthContext);
