@@ -2,7 +2,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 
 const httpClient = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL,
+  baseURL: 'http://indefinitacodicis.com:9091/tickets',
 })
 
 httpClient.interceptors.response.use(
