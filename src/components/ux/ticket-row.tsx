@@ -21,6 +21,7 @@ export function TicketRow({ ticket }: { ticket: TicketType }) {
                     <TableCell>{ticket.queryType}</TableCell>
                     <TableCell>{ticket.consultationReason}</TableCell>
                     <TableCell>{ticket.email}</TableCell>
+                    <TableCell>{ticket.ssn}</TableCell>
                     <TableCell>
                       <Select
                         value={ticket.status}
