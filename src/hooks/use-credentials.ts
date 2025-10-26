@@ -8,6 +8,7 @@ export type Credentials = {
   name: string;
   sso: string;
   active: boolean;
+  job: string | null;
 };
 
 export function useCredentials() {
