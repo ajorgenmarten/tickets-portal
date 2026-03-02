@@ -34,11 +34,13 @@ jobs:
           context: .
           push: true
           tags: |
-            ajorgenmarten/tickets-portal:${{ github.sha }}
-            ajorgenmarten/tickets-portal:latest
+            ${{ secrets.DOCKER_USERNAME }}/alicia-tickets-web:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/alicia-tickets-web:latest
+          build-args: |
+            VITE_BACKEND_URL=${{ secrets.VITE_BACKEND_URL }}
+            VITE_ORCHESTRATOR_URL=${{ secrets.VITE_ORCHESTRATOR_URL }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
 
   deploy:
     runs-on: ubuntu-latest
@@ -49,19 +51,15 @@ jobs:
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.HOST_ADDRESS }}
-          key: ${{ secrets.HOST_SSHKEY }}
+          password: ${{ secrets.HOST_PASSWORD }}
           username: ${{ secrets.HOST_USERNAME }}
           script: |
-            cd projects/alicia
+            docker pull ${{ secrets.DOCKER_USERNAME }}/alicia-tickets-web:${{ github.sha }}
 
-            docker pull ajorgenmarten/tickets-portal:latest || true
+            docker stop alicia-tickets-web || true
 
-            docker compose down tickets-portal
-            docker compose up --build -d tickets-portal
+            docker rm alicia-tickets-web || true
+
+            docker run --name alicia-tickets-web -d -p ${{ secrets.PORT }}:80 ${{ secrets.DOCKER_USERNAME }}/alicia-tickets-web:${{ github.sha }}
 
             docker image prune -f
-
-            
-
-
-
